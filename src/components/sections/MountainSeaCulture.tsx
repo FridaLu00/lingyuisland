@@ -1,9 +1,21 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function MountainSeaCulture() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [visibleCount, setVisibleCount] = useState(0);
+
+  // 文字内容 - 从左到右：白民之国 -> 在龙鱼北 -> 白身披发 -> 有乘黄 -> 其状如狐 -> 其背上有角 -> 乘之寿二千岁
+  const columns = [
+    ['白', '民', '之', '国'],      // 第1列（最左边）
+    ['在', '龙', '鱼', '北'],      // 第2列
+    ['白', '身', '披', '发'],      // 第3列
+    ['有', '乘', '黄'],           // 第4列
+    ['其', '状', '如', '狐'],      // 第5列
+    ['其', '背', '上', '有', '角'], // 第6列
+    ['乘', '之', '寿', '二', '千', '岁'], // 第7列（最右边）
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -13,6 +25,35 @@ export default function MountainSeaCulture() {
             entry.target.querySelectorAll('.reveal').forEach((el, i) => {
               setTimeout(() => el.classList.add('visible'), i * 150);
             });
+
+            // 打字机效果 - 从左到右，每列从上到下
+            const runAnimation = () => {
+              // 重置计数
+              setVisibleCount(0);
+              
+              const delay = 800;
+              const charDelay = 250;
+              let charIndex = 0;
+              
+              // 获取总字符数
+              const totalChars = columns.reduce((sum, col) => sum + col.length, 0);
+
+              // 逐个显示字符
+              const revealNextChar = () => {
+                if (charIndex < totalChars) {
+                  setVisibleCount(charIndex + 1);
+                  charIndex++;
+                  setTimeout(revealNextChar, charDelay);
+                } else {
+                  // 完成后停留3秒再重复
+                  setTimeout(runAnimation, 3000);
+                }
+              };
+
+              setTimeout(revealNextChar, delay);
+            };
+
+            runAnimation();
           }
         });
       },
@@ -46,20 +87,49 @@ export default function MountainSeaCulture() {
         <div className="max-w-4xl mx-auto">
           
           {/* 典籍图片 - 左右拉伸到屏幕边缘，可变形 */}
-          <div className="reveal" style={{ marginBottom: -20, paddingBottom: 0 }}>
+          <div className="reveal relative" style={{ marginBottom: 20, paddingBottom: 0 }}>
             <div className="relative w-full" style={{ marginLeft: '-50vw', marginRight: '-50vw', left: '50%', width: '100vw', height: '400px' }}>
               <img 
                 src="/picture/sizhi1.png" 
                 alt="典籍" 
                 className="w-full h-full object-fill" 
-                style={{ marginBottom: 0, paddingBottom: 0, opacity: 0.9, mixBlendMode: 'multiply', WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-        maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'}}
+                style={{ marginBottom: 0, paddingBottom: 0, opacity: 0.9 }} 
               />
+              
+              {/* 打字机效果文字 - 绝对定位在图片上 */}
+              <div className="absolute inset-0 flex items-center justify-center z-10">
+                <div className="flex justify-center gap-2 lg:gap-4 xl:gap-5" style={{ width: '100%', maxWidth: '900px' }}>
+                  {(() => {
+                    let globalIndex = 0;
+                    return columns.map((column, colIndex) => (
+                      <div key={colIndex} className="flex flex-col items-center gap-1 lg:gap-1.5 flex-1">
+                        {column.map((char, rowIndex) => {
+                          const charGlobalIndex = globalIndex;
+                          globalIndex++;
+                          return (
+                            <span
+                              key={`${colIndex}-${rowIndex}`}
+                              className={`text-sm lg:text-xl xl:text-4xl text-black transition-all duration-300 ${
+                                visibleCount > charGlobalIndex
+                                  ? 'opacity-100'
+                                  : 'opacity-0'
+                              }`}
+                              style={{ fontFamily: "'LixuKeShuFa', 'STKaiti', 'Kaiti SC', 'KaiTi', 'SimKai', serif" }}
+                            >
+                              {char}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    ));
+                  })()}
+                </div>
+              </div>
             </div>
           </div>
 
           {/* 神兽乘黄 - 典故介绍 */}
-          <div style={{ marginTop: -40, paddingTop: 0 }}>
+          <div style={{ marginTop: 0, paddingTop: 0 }}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
               <div>
                 <p className="text-body text-sm mb-3 leading-relaxed" style={{ marginTop: 0 }}>
