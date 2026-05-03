@@ -59,7 +59,7 @@ export default function Model3D({ modelUrl }: { modelUrl: string }) {
     
     fileLoader.load(
       modelUrl,
-      (blob) => {
+      (blob: Blob) => {
         const objectUrl = URL.createObjectURL(blob);
         
         const objLoader = new OBJLoader();
