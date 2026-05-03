@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
 /* ========================================
+   自定义字体 - 李旭科书法
+   ======================================== */
+@font-face {
+  font-family: 'LixuKeShuFa';
+  src: url('/lixukeshufa.woff2') format('woff2'),
+       url('/lixukeshufa.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
    灵屿 - 青绿山水水墨画风格
    ======================================== */
 
