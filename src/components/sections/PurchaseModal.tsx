@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PurchaseModalProps {
@@ -10,12 +10,32 @@ interface PurchaseModalProps {
 
 export default function PurchaseModal({ isOpen, onClose }: PurchaseModalProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
   const productImages = [
     '/picture/CP1.png',
     '/picture/CP2.png',
     '/picture/CP3.png',
   ];
+
+  // 预加载图片
+  const preloadImages = useCallback(() => {
+    productImages.forEach((src) => {
+      if (!loadedImages.has(src)) {
+        const img = new Image();
+        img.onload = () => {
+          setLoadedImages((prev) => new Set([...prev, src]));
+        };
+        img.src = src;
+      }
+    });
+  }, [loadedImages]);
+
+  useEffect(() => {
+    if (isOpen) {
+      preloadImages();
+    }
+  }, [isOpen, preloadImages]);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
