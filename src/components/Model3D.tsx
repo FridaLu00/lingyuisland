@@ -55,7 +55,7 @@ export default function Model3D({ modelUrl }: { modelUrl: string }) {
 
     // 使用FileLoader加载模型
     const fileLoader = new THREE.FileLoader();
-    fileLoader.setResponseType('blob');
+    fileLoader.setResponseType('blob' as THREE.FileLoaderResponseType);
     
     fileLoader.load(
       modelUrl,
