@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 export default function MountainSeaCulture() {
   const sectionRef = useRef<HTMLElement>(null);
   const [visibleCount, setVisibleCount] = useState(0);
+  const hasAnimated = useRef(false);
 
   // 文字内容 - 从左到右：白民之国 -> 在龙鱼北 -> 白身披发 -> 有乘黄 -> 其状如狐 -> 其背上有角 -> 乘之寿二千岁
   const columns = [
@@ -21,7 +22,9 @@ export default function MountainSeaCulture() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !hasAnimated.current) {
+            hasAnimated.current = true;
+            
             entry.target.querySelectorAll('.reveal').forEach((el, i) => {
               setTimeout(() => el.classList.add('visible'), i * 150);
             });
