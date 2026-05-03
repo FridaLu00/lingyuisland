@@ -118,7 +118,7 @@ export default function PurchaseModal({ isOpen, onClose }: PurchaseModalProps) {
             乘黄·寿
           </h2>
           <p className="text-sm opacity-60 mb-4" style={{ color: 'var(--color-ink)' }}>
-            标准版 · ¥60
+            标准版 · ¥99
           </p>
 
           {/* 商品图片区域 */}
