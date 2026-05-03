@@ -1,0 +1,444 @@
+@import "tailwindcss";
+
+/* ========================================
+   灵屿 - 青绿山水水墨画风格
+   ======================================== */
+
+/* 品牌色彩 - 参考青绿山水水墨画配色 */
+:root {
+  --color-ink: #0f1411;           /* 墨黑 - 主标题，更深更沉稳 */
+  --color-ink-light: #3a4a42;     /* 浅墨 - 正文，偏青绿灰 */
+  --color-ink-faint: #6b7d74;     /* 淡墨 - 辅助文字 */
+  
+  --color-paper: #f8faf8;         /* 宣纸白 - 背景，带微绿调 */
+  --color-paper-warm: #f2f5f3;    /* 暖纸色 */
+  --color-cream: #e8ede9;         /* 奶油色，更淡雅 */
+  
+  --color-vermillion: #c23d38;    /* 朱红 - 高饱和点缀，略深 */
+  --color-vermillion-dark: #9a2f2b;
+  
+  --color-mount-green: #2d6b5a;   /* 山峦青绿 - 主色调，参考图片中的青绿山峦 */
+  --color-mount-green-light: #4a9a85;
+  --color-mount-green-faint: #6db8a5;
+  --color-water-blue: #2d5a7b;    /* 涧蓝 - 参考图片中的瀑布蓝色 */
+  --color-water-blue-light: #5a8cb8;
+  --color-water-blue-faint: #8ab8d8;
+  --color-mist: #b5c5be;          /* 薄雾色，更柔和 */
+  
+  --color-amber: #c4a05a;         /* 琥珀色 - 乘黄主体颜色 */
+  --color-amber-light: #d4b87a;
+  --color-earth: #7a6b5a;         /* 土褐色 - 底座颜色 */
+}
+
+/* 基础样式 */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-image: url('/picture/bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  color: var(--color-ink-light);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   字体系统 - 简洁层级
+   ======================================== */
+.font-display {
+  font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+  font-weight: 600;
+}
+
+.font-mono {
+  font-family: "SF Mono", "Monaco", "Inconsolata", monospace;
+}
+
+/* 标题层级 */
+.text-title {
+  font-family: "Noto Serif SC", serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+.text-subtitle {
+  font-family: "Noto Serif SC", serif;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+}
+
+.text-body {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 2;
+  color: var(--color-ink-light);
+}
+
+.text-caption {
+  font-size: 0.85rem;
+  color: var(--color-ink-faint);
+  letter-spacing: 0.03em;
+}
+
+/* 数字序号 - 中文大写 */
+.chapter-num {
+  font-family: "Noto Serif SC", serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  color: var(--color-ink-faint);
+  letter-spacing: 0.15em;
+}
+
+/* ========================================
+   布局系统 - 大面积留白
+   ======================================== */
+.section-padding {
+  padding: clamp(4rem, 10vh, 8rem) clamp(1.5rem, 5vw, 6rem);
+}
+
+.container-narrow {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 非对称布局容器 */
+.asymmetric-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .asymmetric-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+/* ========================================
+   背景装饰 - 青绿山水晕染
+   ======================================== */
+.bg-ink-wash {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-ink-wash::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* 使用背景图片 */
+  background-image: url('/picture/bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-ink-wash::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* 水墨笔触纹理 */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3Cfilter id='brush'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.02' numOctaves='3' result='noise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='noise' scale='3'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='none'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-ink-wash > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 宣纸纹理 */
+.bg-paper {
+  background-color: var(--color-paper);
+  background-image: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
+  background-size: 150px;
+}
+
+/* 青绿山峦渐变背景 */
+.bg-mountain-gradient {
+  background: 
+    linear-gradient(180deg, var(--color-paper) 0%, rgba(45, 107, 90, 0.06) 30%, rgba(45, 90, 123, 0.04) 60%, var(--color-paper) 100%);
+}
+
+/* 山水全景背景 */
+.bg-landscape {
+  position: relative;
+  background: linear-gradient(180deg, var(--color-paper-warm) 0%, var(--color-paper) 40%, var(--color-cream) 100%);
+}
+
+.bg-landscape::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* 远景山脉 */
+    radial-gradient(ellipse 140% 80% at 50% 100%, rgba(45, 107, 90, 0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 120% 60% at 30% 95%, rgba(45, 107, 90, 0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 50% at 70% 92%, rgba(45, 90, 123, 0.12) 0%, transparent 55%),
+    /* 中景云雾 */
+    radial-gradient(ellipse 100% 50% at 20% 40%, rgba(181, 197, 190, 0.2) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 40% at 80% 35%, rgba(181, 197, 190, 0.15) 0%, transparent 50%),
+    /* 瀑布水流 */
+    radial-gradient(ellipse 40% 70% at 95% 15%, rgba(45, 90, 123, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* 书卷展开效果 */
+.bg-scroll {
+  background: linear-gradient(180deg, 
+    var(--color-paper-warm) 0%, 
+    var(--color-paper) 5%, 
+    var(--color-paper) 95%, 
+    var(--color-paper-warm) 100%
+  );
+  box-shadow: 
+    inset 0 4px 20px rgba(0, 0, 0, 0.02),
+    inset 0 -4px 20px rgba(0, 0, 0, 0.02);
+}
+
+/* ========================================
+   装饰元素
+   ======================================== */
+
+/* 朱红印章 */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--color-vermillion);
+  color: var(--color-vermillion);
+  font-family: "Noto Serif SC", serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  transform: rotate(-5deg);
+  opacity: 0.8;
+}
+
+/* 分隔线 - 细线 */
+.divider {
+  width: 4rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-mist), transparent);
+  margin: 2rem auto;
+}
+
+/* 点缀圆点 */
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-mist);
+}
+
+/* 山峦剪影装饰 */
+.mountain-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35vh;
+  background: linear-gradient(180deg, transparent 0%, rgba(45, 107, 90, 0.06) 40%, rgba(45, 90, 123, 0.04) 100%);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23000' d='M0,256L48,245.3C96,235,192,213,288,213.3C384,213,480,235,576,245.3C672,256,768,256,864,245.3C960,235,1056,213,1152,213.3C1248,213,1344,235,1392,245.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  mask-size: cover;
+  mask-position: bottom;
+  pointer-events: none;
+}
+
+/* 瀑布水流装饰 */
+.waterfall-decoration {
+  position: absolute;
+  background: linear-gradient(180deg, rgba(45, 90, 123, 0.08) 0%, rgba(45, 90, 123, 0.04) 50%, transparent 100%);
+  border-radius: 0 0 50% 50%;
+}
+
+/* ========================================
+   按钮样式
+   ======================================== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: "Noto Serif SC", serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-vermillion);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: transparent;
+  color: var(--color-ink);
+  font-family: "Noto Serif SC", serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--color-ink);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* ========================================
+   卡片样式
+   ======================================== */
+.card {
+  background-color: var(--color-paper);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  transition: all 0.4s ease;
+}
+
+.card:hover {
+  border-color: rgba(61, 124, 107, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+/* ========================================
+   动画
+   ======================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatIn {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-float {
+  animation: floatIn 6s ease-in-out infinite;
+}
+
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* 滚动触发动画 */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   滚动条美化
+   ======================================== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-mist);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-faint);
+}
+
+/* ========================================
+   响应式断点
+   ======================================== */
+@media (max-width: 1024px) {
+  .hide-tablet {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+}
