@@ -62,10 +62,11 @@ export default function PurchaseModal({ isOpen, onClose }: PurchaseModalProps) {
 
       {/* 弹窗内容 - 响应式宽度 */}
       <div
-        className="relative w-full max-w-sm mx-auto overflow-hidden"
+        className="relative w-full overflow-hidden"
         style={{
-          maxWidth: '90vw',
-          maxHeight: '90vh',
+          maxWidth: '380px',
+          width: '85vw',
+          maxHeight: '85vh',
           backgroundColor: 'var(--color-paper)',
           borderRadius: '20px',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.3)',
