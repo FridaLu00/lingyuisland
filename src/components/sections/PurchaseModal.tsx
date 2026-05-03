@@ -78,6 +78,7 @@ export default function PurchaseModal({ isOpen, onClose }: PurchaseModalProps) {
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
+        style={{ zIndex: 1 }}
       />
 
       {/* 弹窗内容 - 响应式宽度 */}
@@ -91,13 +92,14 @@ export default function PurchaseModal({ isOpen, onClose }: PurchaseModalProps) {
           borderRadius: '20px',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.3)',
           fontFamily: 'Noto Serif SC, serif',
+          zIndex: 2,
         }}
       >
         {/* 关闭按钮 */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors z-10"
-          style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
+          className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 hover:bg-white hover:scale-110 hover:shadow-md transition-all duration-200 cursor-pointer"
+          style={{ zIndex: 10 }}
         >
           <X size={18} style={{ color: 'var(--color-ink)' }} />
         </button>
@@ -124,7 +126,8 @@ export default function PurchaseModal({ isOpen, onClose }: PurchaseModalProps) {
             {/* 左箭头 */}
             <button
               onClick={handlePrevImage}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 shadow-md hover:bg-white transition-all z-10"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 shadow-md hover:bg-white hover:scale-110 hover:shadow-lg transition-all duration-200 cursor-pointer"
+              style={{ zIndex: 5 }}
             >
               <ChevronLeft size={18} style={{ color: 'var(--color-ink)' }} />
             </button>
@@ -146,7 +149,8 @@ export default function PurchaseModal({ isOpen, onClose }: PurchaseModalProps) {
             {/* 右箭头 */}
             <button
               onClick={handleNextImage}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 shadow-md hover:bg-white transition-all z-10"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 shadow-md hover:bg-white hover:scale-110 hover:shadow-lg transition-all duration-200 cursor-pointer"
+              style={{ zIndex: 5 }}
             >
               <ChevronRight size={18} style={{ color: 'var(--color-ink)' }} />
             </button>
@@ -158,10 +162,10 @@ export default function PurchaseModal({ isOpen, onClose }: PurchaseModalProps) {
               <button
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
+                className={`w-2 h-2 rounded-full transition-all duration-200 cursor-pointer ${
                   index === currentImageIndex
                     ? 'w-5 bg-[var(--color-mount-green)]'
-                    : 'bg-gray-300 hover:bg-gray-400'
+                    : 'bg-gray-300 hover:bg-gray-400 hover:scale-125'
                 }`}
               />
             ))}
@@ -170,7 +174,7 @@ export default function PurchaseModal({ isOpen, onClose }: PurchaseModalProps) {
           {/* 打开淘宝按钮 */}
           <button
             onClick={handleOpenTaobao}
-            className="w-full py-3.5 text-base tracking-widest transition-all duration-300 hover:shadow-lg active:scale-[0.98]"
+            className="w-full py-3.5 text-base tracking-widest transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
             style={{
               backgroundColor: 'var(--color-vermillion)',
               color: 'var(--color-paper)',
