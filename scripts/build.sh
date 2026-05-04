@@ -5,17 +5,14 @@ COZE_WORKSPACE_PATH="${COZE_WORKSPACE_PATH:-$(pwd)}"
 
 cd "${COZE_WORKSPACE_PATH}"
 
-echo "Cleaning cache..."
-pnpm store prune
-
-echo "Installing dependencies..."
+echo "Installing dependencies at root..."
 pnpm install --no-frozen-lockfile
 
-echo "Ensuring @tailwindcss/vite is installed..."
-pnpm add @tailwindcss/vite@4 -D
+echo "Installing dependencies in src directory..."
+cd src && pnpm install --no-frozen-lockfile
 
 echo "Building the Next.js project..."
-cd src && pnpm next build
+pnpm next build
 
 echo "Bundling server with tsup..."
 cd .. && pnpm tsup src/server.ts --format cjs --platform node --target node20 --outDir dist --no-splitting --no-minify
