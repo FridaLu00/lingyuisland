@@ -8,6 +8,9 @@ cd "${COZE_WORKSPACE_PATH}"
 echo "Installing dependencies..."
 pnpm install --no-frozen-lockfile
 
+echo "Installing @tailwindcss/vite for Turbopack..."
+pnpm add @tailwindcss/vite@4
+
 echo "Building the Next.js project..."
 cd src && pnpm next build
 
