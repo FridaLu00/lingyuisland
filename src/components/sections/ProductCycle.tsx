@@ -70,95 +70,23 @@ export default function ProductCycle() {
         {/* 章节标题 */}
         <div className="text-center mb-20 reveal">
           <span className="chapter-num">叁 · 寿时</span>
-          <h2 className="text-title mt-4">闭环体验</h2>
+          <h2 className="text-title mt-4">寿时之约</h2>
         </div>
 
-        {/* 四步流程 - 横向时间线 */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-24">
-          {steps.map((step, index) => (
-            <div key={step.title} className="reveal text-center" style={{ transitionDelay: `${index * 0.1}s` }}>
-              {/* 步骤指示 */}
-              <div className="relative inline-block mb-6">
-                {index < steps.length - 1 && (
-                  <div 
-                    className="absolute top-1/2 left-full w-full h-px"
-                    style={{ 
-                      background: 'linear-gradient(90deg, var(--color-mist), transparent)',
-                      width: 'calc(100% - 2rem)'
-                    }}
-                  />
-                )}
-                <div 
-                  className="w-16 h-16 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: 'rgba(45, 107, 90, 0.08)' }}
-                >
-                  <step.icon size={24} color="var(--color-mount-green)" />
-                </div>
-              </div>
-              
-              <h4 
-                className="text-lg mb-2"
-                style={{ fontFamily: 'Noto Serif SC, serif', color: 'var(--color-ink)' }}
-              >
-                {step.title}
-              </h4>
-              <p className="text-sm leading-relaxed opacity-70">{step.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* 成长体系 */}
-        <div className="reveal">
-          <h3 
-            className="text-xl text-center mb-12"
-            style={{ fontFamily: 'Noto Serif SC, serif', color: 'var(--color-ink)' }}
+        {/* 视频播放器 */}
+        <div className="max-w-4xl mx-auto reveal" style={{ marginTop: 80, marginBottom: 80 }}>
+          <video
+            src="https://frida-coding-files-2026-1376334049.cos.ap-guangzhou.myqcloud.com/xuanchuan.mp4"
+            poster="/picture/XCfengmian.jpg"
+            controls
+            playsInline
+            className="w-full rounded-xl"
+            style={{
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)',
+            }}
           >
-            寿时成长阶段
-          </h3>
-
-          {/* 进度条 */}
-          <div className="max-w-3xl mx-auto">
-            <div className="flex h-2 rounded-full overflow-hidden">
-              {levels.map((level, index) => (
-                <div
-                  key={level.name}
-                  className="relative group"
-                  style={{ 
-                    flex: index === levels.length - 1 ? 1 : 1,
-                    backgroundColor: level.color,
-                    opacity: 0.4
-                  }}
-                >
-                  <div className="absolute inset-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              ))}
-            </div>
-
-            {/* 阶段标签 */}
-            <div className="flex justify-between mt-6">
-              {levels.map((level, index) => (
-                <div key={level.name} className="text-center">
-                  <span 
-                    className="text-sm font-medium"
-                    style={{ 
-                      fontFamily: 'Noto Serif SC, serif',
-                      color: index === 0 ? 'var(--color-ink-faint)' : 'var(--color-ink)'
-                    }}
-                  >
-                    {level.name}
-                  </span>
-                  <span className="block text-xs mt-1" style={{ color: 'var(--color-ink-faint)' }}>
-                    {level.max === Infinity ? '5000+' : `${level.min}-${level.max}`}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 底部说明 */}
-          <p className="text-center text-caption mt-12 max-w-xl mx-auto">
-            每托管30分钟即可计入寿簿，解锁对应山海经知识与灵物图鉴
-          </p>
+            您的浏览器不支持视频播放
+          </video>
         </div>
       </div>
     </section>
