@@ -62,7 +62,7 @@ export default function ProductDetails({ onBuyClick }: ProductDetailsProps) {
   ];
 
   return (
-    <section ref={sectionRef} id="product" className="relative pt-12 pb-12 lg:pt-16 lg:pb-16 bg-transparent overflow-hidden">
+    <section ref={sectionRef} id="product" className="relative py-8 lg:py-12 bg-transparent overflow-hidden">
       {/* 渐变遮罩 - 头尾深，中间浅 */}
       <div 
         className="absolute inset-0"
@@ -82,7 +82,7 @@ export default function ProductDetails({ onBuyClick }: ProductDetailsProps) {
       <div className="container-wide px-6 lg:px-12 relative z-10">
         
         {/* 章节标题 */}
-        <div className="text-center mb-20 reveal">
+        <div className="text-center mb-6 reveal">
           <span className="chapter-num">肆 · 典藏</span>
           <h2 className="text-title mt-4">臻品鉴赏</h2>
         </div>
@@ -90,28 +90,32 @@ export default function ProductDetails({ onBuyClick }: ProductDetailsProps) {
         {/* 左右布局 */}
         <div className="asymmetric-layout" style={{ gridTemplateColumns: '1fr 1fr' }}>
           {/* 左侧 - 3D模型展示 */}
-          <div className="reveal">
-            <div className="sticky top-32">
-              {/* 3D模型容器 */}
-              <div 
-                className="aspect-[4/5] rounded-lg relative overflow-hidden"
-              >
-                <Model3D modelUrl="https://frida-coding-files-2026-1376334049.cos.ap-guangzhou.myqcloud.com/chenghuang.obj" />
-              </div>
+          <div className="reveal flex items-center justify-center">
+            {/* 3D模型容器 */}
+            <div 
+              className="w-full max-w-md aspect-[4/5] rounded-lg relative overflow-hidden"
+            >
+              <Model3D modelUrl="https://frida-coding-files-2026-1376334049.cos.ap-guangzhou.myqcloud.com/chenghuang.obj" />
             </div>
           </div>
 
           {/* 右侧 - 详情 */}
-          <div className="space-y-12">
+          <div className="space-y-3">
             {/* 产品名 */}
-            <div className="reveal">
-              <h3 
-                className="text-2xl mb-2"
-                style={{ fontFamily: 'Noto Serif SC, serif', color: 'var(--color-ink)' }}
-              >
-                乘黄·寿 智能摆件
-              </h3>
-              <p className="text-caption">Chenghuang · Shou Smart Ornament</p>
+            <div className="reveal flex items-start gap-8">
+              <div>
+                <h3 
+                  className="text-2xl mb-2"
+                  style={{ fontFamily: 'Noto Serif SC, serif', color: 'var(--color-ink)' }}
+                >
+                  乘黄·寿 智能摆件
+                </h3>
+                <p className="text-caption">Chenghuang · Shou Smart Ornament</p>
+              </div>
+              {/* 立即典藏按钮 */}
+              <button onClick={onBuyClick} className="btn-primary flex-shrink-0">
+                立即典藏
+              </button>
             </div>
 
             {/* 功能特点 */}
@@ -157,12 +161,7 @@ export default function ProductDetails({ onBuyClick }: ProductDetailsProps) {
               </div>
             </div>
 
-            {/* 立即典藏按钮 */}
-            <div className="reveal">
-              <button onClick={onBuyClick} className="btn-primary">
-                立即典藏
-              </button>
-            </div>
+
           </div>
         </div>
       </div>
