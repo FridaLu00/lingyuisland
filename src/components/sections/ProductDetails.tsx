@@ -95,7 +95,7 @@ export default function ProductDetails({ onBuyClick }: ProductDetailsProps) {
             <div 
               className="w-full max-w-md aspect-[4/5] rounded-lg relative overflow-hidden"
             >
-              <Model3D modelUrl="https://frida-coding-files-2026-1376334049.cos.ap-guangzhou.myqcloud.com/chenghuang.obj" />
+              <Model3D modelUrl="https://frida.t3.tigrisfiles.io/chenghuang.obj" />
             </div>
           </div>
 
