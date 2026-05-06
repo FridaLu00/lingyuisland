@@ -76,7 +76,7 @@ export default function ProductCycle() {
         {/* 视频播放器 */}
         <div className="max-w-4xl mx-auto reveal" style={{ marginTop: 80, marginBottom: 80 }}>
           <video
-            src="https://frida-coding-files-2026-1376334049.cos.ap-guangzhou.myqcloud.com/xuanchuan.mp4"
+            src="https://frida.t3.tigrisfiles.io/xuanchuan.mp4"
             poster="/picture/XCfengmian.jpg"
             controls
             playsInline
