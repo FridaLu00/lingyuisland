@@ -152,7 +152,7 @@ export default function MountainSeaCulture() {
                   }}
                 >
                   <video 
-                    src="https://frida-coding-files-2026-1376334049.cos.ap-guangzhou.myqcloud.com/donghua.mp4" 
+                    src="/video/donghua.mp4" 
                     autoPlay 
                     muted 
                     loop 
