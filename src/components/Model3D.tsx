@@ -53,12 +53,27 @@ export default function Model3D({ modelUrl }: { modelUrl: string }) {
     bottomLight.position.set(0, -3, 5);
     scene.add(bottomLight);
 
-    // 使用FileLoader加载模型
-    const fileLoader = new THREE.FileLoader();
-    fileLoader.load(
-      modelUrl,
-      (data: string | ArrayBuffer) => {
-        // 如果是 ArrayBuffer，转换为 Blob 然后创建 object URL
+    // 使用 fetch API 加载模型（提供更详细的错误信息）
+    console.log('尝试加载模型:', modelUrl);
+    
+    fetch(modelUrl, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/octet-stream',
+      },
+    })
+      .then(response => {
+        console.log('HTTP状态码:', response.status);
+        console.log('响应头:', response.headers);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP错误! 状态码: ${response.status}`);
+        }
+        return response.arrayBuffer();
+      })
+      .then(data => {
+        console.log('模型数据加载成功, 大小:', data.byteLength, 'bytes');
         const blob = new Blob([data]);
         const objectUrl = URL.createObjectURL(blob);
         
@@ -68,7 +83,7 @@ export default function Model3D({ modelUrl }: { modelUrl: string }) {
           (group) => {
             URL.revokeObjectURL(objectUrl);
             
-            group.scale.set(15, 15, 15);
+            group.scale.set(20, 20, 20);
             group.position.y = -1;
             
             group.traverse((child) => {
@@ -97,13 +112,18 @@ export default function Model3D({ modelUrl }: { modelUrl: string }) {
             setLoadError(true);
           }
         );
-      },
-      undefined,
-      (error) => {
-        console.error('文件加载失败:', error);
+      })
+      .catch((error) => {
+        console.error('=== 模型加载失败 ===');
+        console.error('错误详情:', error);
+        console.error('模型URL:', modelUrl);
+        console.error('=== 请检查 ===');
+        console.error('1. CORS配置是否正确保存并生效');
+        console.error('2. 模型文件是否存在于该URL');
+        console.error('3. 网络连接是否正常');
+        console.error('4. 尝试在浏览器直接打开该URL测试');
         setLoadError(true);
-      }
-    );
+      });
 
     // 动画循环
     let animationId: number;
